@@ -1,33 +1,73 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的作品集 | iOS Developer</title>
-  <style>
-    body { font-family: sans-serif; margin: 0; padding: 0; background: #fafafa; }
-    header { background: #000; color: white; padding: 2rem; text-align: center; }
-    section { max-width: 800px; margin: 2rem auto; padding: 1rem; }
-    .project { background: white; margin-bottom: 1rem; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    a { color: #007aff; text-decoration: none; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wedding Gallery</title>
+<meta name="description" content="四個場景、41 幀。">
+<meta name="theme-color" content="#0c0b0a">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wedding Gallery">
+<meta property="og:image" content="photos/full/YR5_3422.webp">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preload" as="image" href="photos/full/YR5_3422.webp">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23c9a876' stroke-width='1.5'/%3E%3C/svg%3E">
 </head>
-<body>
-  <header>
-    <h1>👋 嗨，我是 Nicky，一名 iOS App 工程師</h1>
-    <p>這是我的作品集，展示我的開發成果與技術能力</p>
-  </header>
-  <section>
-    <div class="project">
-      <h2>🍎 Swift Habit Tracker</h2>
-      <p>使用 SwiftUI 打造的習慣追蹤 App，支援 iCloud 同步。</p>
-      <a href="https://github.com/你的帳號/SwiftHabitTracker">查看 GitHub Repo</a>
-    </div>
-    <div class="project">
-      <h2>💬 ChatFlow</h2>
-      <p>結合 Firebase Realtime Database 的即時聊天 App。</p>
-      <a href="https://github.com/你的帳號/ChatFlow">查看 GitHub Repo</a>
-    </div>
+
+<body class="is-loading">
+
+<!-- ── 載入：只有一條線 ─────────────────────────────── -->
+<div id="loader" aria-hidden="true">
+  <div class="loader-bar"><span id="loaderFill"></span></div>
+</div>
+
+<!-- ── 自訂游標（僅桌機） ───────────────────────────── -->
+<div id="cursor" aria-hidden="true"><span id="cursorRing"></span><span id="cursorDot"></span></div>
+
+<!-- ── 右側章節指示／導覽 ───────────────────────────── -->
+<nav id="rail" aria-label="章節"></nav>
+
+<main id="top">
+
+  <!-- ── 首屏 ──────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-stage" id="heroStage"></div>
+    <div class="hero-veil"></div>
+    <div class="hero-scroll" aria-hidden="true"><span></span></div>
+    <div class="hero-dots" id="heroDots" aria-hidden="true"></div>
   </section>
+
+  <!-- ── 章節由 JS 產生 ────────────────────────────── -->
+  <div id="chapters"></div>
+
+  <!-- ── 結尾：一條線 + 回到開始 ───────────────────── -->
+  <section id="outro">
+    <button class="outro-top" type="button" id="backTop" aria-label="回到開始">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </button>
+  </section>
+
+</main>
+
+<!-- ── 燈箱 ────────────────────────────────────────── -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="照片檢視" hidden>
+  <div class="lb-backdrop"></div>
+
+  <figure class="lb-stage">
+    <div class="lb-fit"><img id="lbImg" alt=""></div>
+  </figure>
+
+  <button class="lb-btn lb-prev" type="button" aria-label="上一張"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8"/></svg></button>
+  <button class="lb-btn lb-next" type="button" aria-label="下一張"><svg viewBox="0 0 24 24"><path d="M9 4l8 8-8 8"/></svg></button>
+  <button class="lb-btn lb-close" type="button" aria-label="關閉"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+
+  <div class="lb-film" id="lbFilm"></div>
+</div>
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
 </body>
 </html>
